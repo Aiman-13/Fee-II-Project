@@ -10,6 +10,7 @@ export default function LoginPage() {
     e.preventDefault()
     localStorage.setItem('nexusfilm_signedin', 'true')
     localStorage.setItem('nexusfilm_username', username || 'User')
+    window.dispatchEvent(new Event('authStateChanged'))
     navigate('/')
   }
 

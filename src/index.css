@@ -1305,15 +1305,50 @@ footer {
 }
 
 .profile-container {
-  max-width: 500px;
+  max-width: 750px;
   margin: 80px auto 0 auto;
   background: #181a2a;
   border-radius: 18px;
   box-shadow: 0 4px 24px rgba(0, 0, 0, 0.18);
-  padding: 40px 36px 32px 36px;
+  padding: 60px 55px 50px 55px;
   color: #fff;
-  text-align: center;
   position: relative;
+}
+
+.profile-content {
+  display: flex;
+  gap: 80px;
+  align-items: flex-start;
+}
+
+.profile-guest .profile-content {
+  flex-direction: column;
+  align-items: center;
+  gap: 0;
+}
+
+.profile-guest .profile-left {
+  text-align: center;
+}
+
+.profile-guest .profile-actions {
+  margin-top: 20px;
+}
+
+.profile-left {
+  flex-shrink: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.profile-right {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  text-align: left;
 }
 
 .profile-back-btn {
@@ -1419,8 +1454,34 @@ footer {
 @media (max-width: 900px) {
   .profile-container {
     margin: 120px auto 40px auto;
-    padding: 28px 20px 16px 20px;
-    max-width: 90%;
+    padding: 40px 30px 30px 30px;
+    max-width: 95%;
+  }
+
+  .profile-back-btn {
+    top: 10px;
+    left: 10px;
+    width: 36px;
+    height: 36px;
+  }
+
+  .profile-content {
+    flex-direction: column;
+    align-items: center;
+    gap: 25px;
+  }
+
+  .profile-left {
+    width: 100%;
+  }
+
+  .profile-right {
+    width: 100%;
+    text-align: center;
+  }
+
+  .profile-info {
+    text-align: left;
   }
 }
 
@@ -1814,6 +1875,160 @@ footer {
   .contact-info,
   .contact-form {
     padding: 20px 16px;
+  }
+}
+
+/* Movie Details Page Styles */
+.movie-details-page {
+  min-height: 100vh;
+  padding-top: 100px;
+  padding-bottom: 40px;
+  padding-left: 80px;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+}
+
+.movie-details-container {
+  max-width: 1100px;
+  width: 100%;
+  padding: 0 20px;
+  display: flex;
+  flex-direction: row;
+  gap: 40px;
+  align-items: flex-start;
+}
+
+.movie-poster-wrapper {
+  flex-shrink: 0;
+}
+
+.movie-details-poster {
+  max-width: 400px;
+  width: 100%;
+  height: auto;
+  border-radius: 16px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+  transition: transform 0.3s ease;
+}
+
+.movie-details-poster:hover {
+  transform: scale(1.02);
+}
+
+.movie-info {
+  flex: 1;
+  background: #181a2a;
+  padding: 35px 30px;
+  border-radius: 16px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+}
+
+.movie-details-title {
+  font-size: 2.2rem;
+  font-weight: 800;
+  color: #fff;
+  margin-bottom: 10px;
+}
+
+.movie-year {
+  font-size: 1.2rem;
+  font-weight: 400;
+  color: #c09ee8;
+}
+
+.movie-description {
+  font-size: 1.05rem;
+  line-height: 1.7;
+  color: #b3d1ff;
+  margin-top: 20px;
+  margin-bottom: 25px;
+}
+
+.movie-meta {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 15px;
+  margin-top: 20px;
+}
+
+.meta-item {
+  font-size: 1rem;
+  color: #fff;
+  background: rgba(53, 51, 205, 0.15);
+  padding: 12px 16px;
+  border-radius: 10px;
+  border: 1px solid rgba(53, 51, 205, 0.3);
+}
+
+@media (max-width: 768px) {
+  .movie-details-page {
+    padding-top: 90px;
+    padding-left: 0;
+  }
+
+  .movie-details-container {
+    flex-direction: column;
+    align-items: center;
+    gap: 25px;
+  }
+
+  .movie-poster-wrapper {
+    display: flex;
+    justify-content: center;
+  }
+
+  .movie-details-poster {
+    max-width: 300px;
+  }
+
+  .movie-info {
+    padding: 25px 20px;
+    width: 100%;
+  }
+
+  .movie-details-title {
+    font-size: 1.8rem;
+  }
+
+  .movie-year {
+    font-size: 1rem;
+  }
+
+  .movie-description {
+    font-size: 0.95rem;
+  }
+
+  .movie-meta {
+    grid-template-columns: 1fr;
+    gap: 10px;
+  }
+
+  .meta-item {
+    font-size: 0.9rem;
+    padding: 10px 14px;
+  }
+}
+
+@media (max-width: 480px) {
+  .movie-details-container {
+    padding: 0 10px;
+  }
+
+  .movie-details-poster {
+    max-width: 250px;
+  }
+
+  .movie-info {
+    padding: 20px 16px;
+  }
+
+  .movie-details-title {
+    font-size: 1.5rem;
+  }
+
+  .movie-description {
+    font-size: 0.9rem;
   }
 }
 

@@ -12,6 +12,8 @@ export default function SignupPage() {
     // In this demo, sign up behaves like sign in
     localStorage.setItem('nexusfilm_signedin', 'true')
     localStorage.setItem('nexusfilm_username', username || 'User')
+    localStorage.setItem('nexusfilm_email', email)
+    window.dispatchEvent(new Event('authStateChanged'))
     navigate('/')
   }
 

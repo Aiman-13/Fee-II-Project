@@ -1,15 +1,42 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
 
 export default function Navbar() {
   const [menuOpen, setMenuOpen] = useState(false)
-  const isLoggedIn = typeof window !== 'undefined' && localStorage.getItem('nexusfilm_signedin') === 'true'
-  const username = typeof window !== 'undefined' && localStorage.getItem('nexusfilm_username') || ''
+  const [isLoggedIn, setIsLoggedIn] = useState(false)
+  const [username, setUsername] = useState('')
+
+  useEffect(() => {
+    // Check login status on mount
+    const checkLoginStatus = () => {
+      const signedIn = localStorage.getItem('nexusfilm_signedin') === 'true'
+      const user = localStorage.getItem('nexusfilm_username') || ''
+      setIsLoggedIn(signedIn)
+      setUsername(user)
+    }
+
+    checkLoginStatus()
+
+    // Listen for storage changes (from other tabs/windows)
+    window.addEventListener('storage', checkLoginStatus)
+
+    // Listen for custom event (from same window)
+    window.addEventListener('authStateChanged', checkLoginStatus)
+
+    return () => {
+      window.removeEventListener('storage', checkLoginStatus)
+      window.removeEventListener('authStateChanged', checkLoginStatus)
+    }
+  }, [])
 
   function handleLogout(e) {
     e.preventDefault()
     localStorage.removeItem('nexusfilm_signedin')
     localStorage.removeItem('nexusfilm_username')
+    localStorage.removeItem('nexusfilm_email')
+    setIsLoggedIn(false)
+    setUsername('')
+    window.dispatchEvent(new Event('authStateChanged'))
     window.location.href = '/'
   }
 

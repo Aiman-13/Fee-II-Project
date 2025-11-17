@@ -14,19 +14,19 @@ export default function MovieDetails() {
   }
 
   return (
-    <main className="container py-8">
-      <div className="movie-backdrop rounded-lg p-6" style={{ backgroundImage: `linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url(${movie.backdrop || movie.poster})`, backgroundSize: 'cover' }}>
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 items-start">
-          <img src={movie.poster} alt={movie.title} className="rounded-lg shadow-lg w-full md:w-auto" />
-          <div className="md:col-span-2 text-white">
-            <h1 className="text-3xl font-bold">🎥 {movie.title} <span className="text-base">({movie.year})</span></h1>
-            <p className="mt-2">📜 {movie.description}</p>
-            <div className="mt-4 grid grid-cols-1 sm:grid-cols-2 gap-2 text-sm">
-              <div>⭐ {movie.rating}/10</div>
-              <div>⏱️ {movie.duration}</div>
-              <div>🎭 {movie.genres}</div>
-              <div>🌐 {movie.languages}</div>
-            </div>
+    <main className="movie-details-page">
+      <div className="movie-details-container">
+        <div className="movie-poster-wrapper">
+          <img src={movie.poster} alt={movie.title} className="movie-details-poster" />
+        </div>
+        <div className="movie-info">
+          <h1 className="movie-details-title">🎥 {movie.title} <span className="movie-year">({movie.year})</span></h1>
+          <p className="movie-description">📜 {movie.description}</p>
+          <div className="movie-meta">
+            <div className="meta-item">⭐ {movie.rating}/10</div>
+            <div className="meta-item">⏱️ {movie.duration}</div>
+            <div className="meta-item">🎭 {movie.genres}</div>
+            <div className="meta-item">🌐 {movie.languages}</div>
           </div>
         </div>
       </div>

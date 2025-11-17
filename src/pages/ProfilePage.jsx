@@ -31,7 +31,7 @@ export default function ProfilePage() {
 
   return (
     <div className="profile-container-wrapper">
-      <div className="profile-container">
+      <div className={`profile-container ${isSignedIn ? 'profile-signed-in' : 'profile-guest'}`}>
         <button 
           onClick={() => navigate('/')} 
           className="profile-back-btn"
@@ -42,48 +42,51 @@ export default function ProfilePage() {
           </svg>
         </button>
         
-        <img 
-          src={isSignedIn ? 'https://randomuser.me/api/portraits/men/32.jpg' : 'https://randomuser.me/api/portraits/lego/1.jpg'} 
-          alt="User Avatar" 
-          className="profile-avatar"
-        />
-        
-        <div className="profile-name">{username}</div>
-        
-        {isSignedIn && email && (
-          <div className="profile-email">{email}</div>
-        )}
-        
-        {isSignedIn && (
-          <div className="profile-info">
-            <label>Username:</label>
-            <p>{username.toLowerCase().replace(/\s+/g, '')}</p>
-            <label>Member Since:</label>
-            <p>{new Date().toLocaleDateString('en-US', { month: 'long', year: 'numeric' })}</p>
-            <label>Favorite Genre:</label>
-            <p>Action</p>
+        <div className="profile-content">
+          <div className="profile-left">
+            <img 
+              src={isSignedIn ? 'https://randomuser.me/api/portraits/men/32.jpg' : 'https://randomuser.me/api/portraits/lego/1.jpg'} 
+              alt="User Avatar" 
+              className="profile-avatar"
+            />
+            
+            <div className="profile-name">{username}</div>
+            
+            {isSignedIn && email && (
+              <div className="profile-email">{email}</div>
+            )}
           </div>
-        )}
-        
-        {!isSignedIn ? (
-          <div className="profile-actions">
-            <button className="edit-btn" onClick={() => navigate('/login')}>
-              Sign In
-            </button>
-            <button className="edit-btn" onClick={() => navigate('/signup')}>
-              Sign Up
-            </button>
-          </div>
-        ) : (
-          <div className="profile-logged-in-actions">
-            <button className="edit-btn" onClick={handleEditProfile}>
-              Edit Profile
-            </button>
-            <button className="edit-btn logout-btn-profile" onClick={handleLogout}>
-              Logout
-            </button>
-          </div>
-        )}
+
+          {isSignedIn && (
+            <div className="profile-right">
+              <div className="profile-info">
+                <label>Username:</label>
+                <p>{username.toLowerCase().replace(/\s+/g, '')}</p>
+                <label>Member Since:</label>
+                <p>{new Date().toLocaleDateString('en-US', { month: 'long', year: 'numeric' })}</p>
+                <label>Favorite Genre:</label>
+                <p>Action</p>
+              </div>
+              
+              <div className="profile-logged-in-actions">
+                <button className="edit-btn logout-btn-profile" onClick={handleLogout}>
+                  Logout
+                </button>
+              </div>
+            </div>
+          )}
+
+          {!isSignedIn && (
+            <div className="profile-actions">
+              <button className="edit-btn" onClick={() => navigate('/login')}>
+                Sign In
+              </button>
+              <button className="edit-btn" onClick={() => navigate('/signup')}>
+                Sign Up
+              </button>
+            </div>
+          )}
+        </div>
       </div>
     </div>
   )

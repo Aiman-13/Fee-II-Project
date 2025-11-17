@@ -1,7 +1,30 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
 
 export default function Footer() {
+  const [isLoggedIn, setIsLoggedIn] = useState(false)
+
+  useEffect(() => {
+    // Check login status on mount
+    const checkLoginStatus = () => {
+      const signedIn = localStorage.getItem('nexusfilm_signedin') === 'true'
+      setIsLoggedIn(signedIn)
+    }
+
+    checkLoginStatus()
+
+    // Listen for storage changes (from other tabs/windows)
+    window.addEventListener('storage', checkLoginStatus)
+
+    // Listen for custom event (from same window)
+    window.addEventListener('authStateChanged', checkLoginStatus)
+
+    return () => {
+      window.removeEventListener('storage', checkLoginStatus)
+      window.removeEventListener('authStateChanged', checkLoginStatus)
+    }
+  }, [])
+
   return (
     <footer className="site-footer">
       <div className="footer-content">
@@ -23,8 +46,12 @@ export default function Footer() {
           <div className="footer-section">
             <h3>Account</h3>
             <div className="footer-links">
-              <Link to="/login">Sign In</Link>
-              <Link to="/signup">Sign Up</Link>
+              {!isLoggedIn ? (
+                <>
+                  <Link to="/login">Sign In</Link>
+                  <Link to="/signup">Sign Up</Link>
+                </>
+              ) : null}
               <Link to="/profile">Profile</Link>
             </div>
           </div>
