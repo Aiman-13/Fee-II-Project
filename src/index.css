@@ -1901,6 +1901,32 @@ footer {
 
 .movie-poster-wrapper {
   flex-shrink: 0;
+  position: relative;
+}
+
+.play-button {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  cursor: pointer;
+  transition: all 0.3s ease;
+  z-index: 10;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.play-button:hover {
+  transform: translate(-50%, -50%) scale(1.15);
+}
+
+.play-button svg circle {
+  transition: fill 0.3s ease;
+}
+
+.play-button:hover svg circle {
+  fill: rgba(53, 51, 205, 1);
 }
 
 .movie-details-poster {
